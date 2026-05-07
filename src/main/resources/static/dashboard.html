@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard • TeamFlow</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        .stat-card { transition: all 0.3s; }
+        .stat-card:hover { transform: translateY(-8px); }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">TeamFlow</a>
+
+            <div class="d-flex align-items-center">
+                <span class="text-white me-3 fw-medium" id="welcomeUser"></span>
+                <button class="btn btn-danger" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+
+        <!-- DASHBOARD -->
+        <h2 class="mb-4">Project Overview</h2>
+
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="card stat-card text-bg-warning shadow h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-clock fs-1 mb-3"></i>
+                        <h5>Pending</h5>
+                        <h2 id="pendingCount" class="fw-bold">0</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card stat-card text-bg-primary shadow h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-arrow-repeat fs-1 mb-3"></i>
+                        <h5>In Progress</h5>
+                        <h2 id="progressCount" class="fw-bold">0</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card stat-card text-bg-success shadow h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-check-circle fs-1 mb-3"></i>
+                        <h5>Completed</h5>
+                        <h2 id="doneCount" class="fw-bold">0</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECTS -->
+        <div class="card shadow mb-5">
+            <div class="card-body">
+                <h3 class="mb-3">
+                    <i class="bi bi-folder2-open"></i> Projects
+                </h3>
+
+                <ul class="list-group" id="projectList">
+                    <li class="list-group-item text-muted">Loading projects...</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ADMIN CONTROLS -->
+        <div id="adminControls" class="mb-5" style="display:none;">
+            <div class="row g-4">
+
+                <!-- CREATE PROJECT -->
+                <div class="col-md-6">
+                    <div class="card shadow h-100">
+                        <div class="card-body">
+                            <h3 class="mb-3">
+                                <i class="bi bi-folder-plus"></i> Create Project
+                            </h3>
+
+                            <input type="text" id="projectName" class="form-control mb-3" placeholder="Project Name">
+
+                            <textarea id="projectDescription" class="form-control mb-3" rows="4" placeholder="Project Description"></textarea>
+
+                            <button class="btn btn-primary w-100" onclick="createProject()">
+                                Create Project
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ASSIGN TASK -->
+                <div class="col-md-6">
+                    <div class="card shadow h-100">
+                        <div class="card-body">
+                            <h3 class="mb-3">
+                                <i class="bi bi-person-plus"></i> Assign Task
+                            </h3>
+
+                            <input type="text" id="taskTitle" class="form-control mb-3" placeholder="Task Title">
+
+                            <textarea id="taskDescription" class="form-control mb-3" rows="3" placeholder="Task Description"></textarea>
+
+                            <input type="date" id="deadline" class="form-control mb-3">
+
+                            <select id="assignedTo" class="form-select mb-3">
+                                <option value="">Select Team Member</option>
+                            </select>
+
+                            <button class="btn btn-success w-100" onclick="createTask()">
+                                Assign Task
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TASKS -->
+        <div class="card shadow mb-5">
+            <div class="card-body">
+                <h3 class="mb-3">
+                    <i class="bi bi-list-task"></i>
+                    <span id="taskSectionTitle">My Tasks</span>
+                </h3>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Deadline</th>
+                                <th id="taskActionHeader">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="taskTableBody">
+                            <tr>
+                                <td colspan="5" class="text-center text-muted">
+                                    Loading tasks...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
