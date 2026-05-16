@@ -1,5 +1,5 @@
-const BASE_URL = "http://localhost:8082";
-
+// const BASE_URL = "http://localhost:8082";
+const BASE_URL = window.location.origin;
 // Simple Toast Notification
 function showToast(message, type = "success") {
     const toast = document.createElement("div");
